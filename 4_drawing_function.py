@@ -10,7 +10,7 @@ img = np.zeros((512, 512, 3), np.uint8)
 cv.line(img, (0,0), (511,511), (0, 0, 255), 5)
 
 # adding reactangle
-cv.rectangle(img, (350, 0), (510, 152), (0,255,0), 5)
+cv.rectangle(img, (350, 0), (510, 152), (0,255,0), -1)
 
 # adding circle
 cv.circle(img,(430,76), 76, (0,0,255), -1)
