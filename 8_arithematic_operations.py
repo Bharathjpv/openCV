@@ -29,7 +29,7 @@ import cv2 as cv
 ############################ Bit wise operations #####################
 
 img1 = cv.imread('image.jpg')
-img2 = cv.imread('roi.jpg')
+img2 = cv.imread('OpenCV_Logo.png')
 
 img1 = cv.resize(img1, (450, 280))
 
@@ -37,14 +37,24 @@ rows,cols,channels = img2.shape
 roi = img1[0:rows, 0:cols]
 
 # cv.imshow('roi', roi)
-# Now create a mask of logo and create its inverse mask also
-img2gray = cv.cvtColor(img1, cv.COLOR_BGR2GRAY)
+# Now create a mask of img1 and create its inverse mask also
+img2gray = cv.cvtColor(img2, cv.COLOR_BGR2GRAY)
 ret, mask = cv.threshold(img2gray, 10, 255, cv.THRESH_BINARY)
 
 print(ret)
 mask_inv = cv.bitwise_not(mask)
 
-cv.imshow('window', mask_inv)
+# Black out the area of img1 in ROI
+img1_bg = cv.bitwise_and(roi, roi, mask=mask_inv)
+
+# Take only region of logo from logo image.
+img2_fg = cv.bitwise_and(img2,img2,mask = mask)
+
+# put logo in roi and modefy the image
+dst = cv.add(img1_bg, img2_fg)
+img1[0:rows, 0:cols] = dst
+
+cv.imshow('window', img1)
 
 cv.waitKey(0)
 cv.destroyAllWindows()
