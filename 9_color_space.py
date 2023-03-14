@@ -24,9 +24,11 @@ while(1):
     mask = cv.inRange(hsv, lower_blue, upper_blue)
 
 
-    res = cv.bitwise_and(frame, frame)
+    res = cv.bitwise_and(frame, frame, mask=mask)
 
-    cv.imshow('window',mask)
+    cv.imshow('frame',frame)
+    cv.imshow('mask',mask)
+    cv.imshow('res',res)
 
     k = cv.waitKey(1) & 0xFF
     if k == ord('q'):
