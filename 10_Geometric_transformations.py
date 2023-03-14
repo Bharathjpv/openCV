@@ -91,16 +91,6 @@ import matplotlib.pyplot as plt
 img = cv.imread('sudoku.jpeg', cv.IMREAD_GRAYSCALE)
 rows, cols = img.shape
 
-# pts1 = np.float32([[40,80],[125,45],[80, 170]])
-# pts2 = np.float32([[20,20],[60,20],[20,120]])
-# M = cv.getAffineTransform(pts1,pts2)
-
-# dst = cv.warpAffine(img, M, (cols, rows))
-
-# plt.subplot(121),plt.imshow(img),plt.title('Input')
-# plt.subplot(122),plt.imshow(dst),plt.title('Output')
-# plt.show()
-
 pts1 = np.float32([[40, 80],[125, 45],[80, 170],[170, 125]])
 pts2 = np.float32([[0,0],[200,0],[0,200],[200,200]])
 
@@ -111,6 +101,7 @@ print(M)
 cv.imshow('window', img)
 # cv.imshow('window1', dst)
 cv.imshow('window2', res)
+cv.imwrite('sudoku_trans.png', res)
 
 cv.waitKey(0)
 cv.destroyAllWindows()
